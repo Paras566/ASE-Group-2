@@ -4,17 +4,17 @@ import './App.css';
 function App() {
   'use strict'
 const numberbox = document.getElementById("numberbox");
-const progressBar = document.getElementById("progress-bar")
+// const progressBar = document.getElementById("progress-bar")
 const playButton = document.getElementById('play-button');
-const pauseButton = document.getElementById("pause-button");
+// const pauseButton = document.getElementById("pause-button");
 
-const queen = '<i class="fas fa-chess-queen" style="color:#000"></i>';
+const queen = '<i class="fas fa-chess-queen" style="color:#909497"></i>';
 
-let n, speed, tempSpeed, q, Board = 0;
+let n, q, Board = 0;
 // Board = 0;
 
 // Creating array for all the possible arrangements of the N-Queen
-let array = [0, 2, 1, 1, 3, 11, 5, 41, 93];
+let array = [0, 2, 1, 1, 3, 11, 5, 41, 93, 353, 752, 2681, 14201];
 
 // Used to store the state of the boards;
 let pos = {};
@@ -45,7 +45,7 @@ class Queen {
         const currentColumn = currentRow.getElementsByTagName("td")[col];
         currentColumn.innerHTML = queen;
         // currentColumn.style.backgroundColor = "#FF9F1C";
-        await q.delay();
+        // await q.delay();
 
         // Checking the queen in the same column
         for (let i = r - 1; i >= 0; --i) {
@@ -55,12 +55,12 @@ class Queen {
             const value = column.innerHTML;
 
             if (value == queen) {
-                column.style.backgroundColor = "#FB5607";
+                column.style.backgroundColor = "#000000";
                 currentColumn.innerHTML = "-"
                 return false;
             }
             column.style.backgroundColor = "#ffca3a";
-            await q.delay();
+            // await q.delay();
         }
 
         //Checking the upper left diagonal
@@ -70,12 +70,12 @@ class Queen {
             const value = column.innerHTML;
 
             if (value == queen) {
-                column.style.backgroundColor = "#fb5607";
+                column.style.backgroundColor = "#00000";
                 currentColumn.innerHTML = "-"
                 return false;
             }
             column.style.backgroundColor = "#ffca3a";
-            await q.delay();
+            // await q.delay();
         }
 
         // Checking the upper right diagonal
@@ -86,12 +86,12 @@ class Queen {
             const value = column.innerHTML;
 
             if (value == queen) {
-                column.style.backgroundColor = "#FB5607";
+                column.style.backgroundColor = "#000000";
                 currentColumn.innerHTML = "-"
                 return false;
             }
             column.style.backgroundColor = "#ffca3a";
-            await q.delay();
+            // await q.delay();
         }
         return true;
     }
@@ -102,13 +102,13 @@ class Queen {
             const row = table.firstChild.childNodes[j];
             for (let k = 0; k < n; ++k)
                 (j + k) & 1
-                    ? (row.getElementsByTagName("td")[k].style.backgroundColor = "#FF9F1C")
-                    : (row.getElementsByTagName("td")[k].style.backgroundColor = "#FCCD90");
+                    ? (row.getElementsByTagName("td")[k].style.backgroundColor = "#000000")
+                    : (row.getElementsByTagName("td")[k].style.backgroundColor = "#FFFFFF");
         }
     }
 
     delay = async () => {
-        await new Promise((done) => setTimeout(() => done(), speed));
+        // await new Promise((done) => setTimeout(() => done(), speed));
     }
 
     solveQueen = async (board, r, n) => {
@@ -126,9 +126,9 @@ class Queen {
         for (let i = 0; i < n; ++i) {
             await q.delay();
             // console.log("outside:" + board);
-            await q.clearColor(board);
+            // await q.clearColor(board);
             if (await q.isValid(board, r, i, n)) {
-                await q.delay();
+                // await q.delay();
                 // console.log("inside:" + board)
                 await q.clearColor(board);
                 let table = document.getElementById(`table-${this.uuid[board]}`);
@@ -140,7 +140,7 @@ class Queen {
                 if (await q.solveQueen(board, r + 1, n))
                     await q.clearColor(board);
 
-                await q.delay();
+                // await q.delay();
                 board = Board;
                 // console.log(this.Board)
                 table = document.getElementById(`table-${this.uuid[board]}`);
@@ -161,7 +161,7 @@ playButton.onclick = async function visualise() {
     n = numberbox.value;
     q = new Queen();
 
-    if (n > 8) {
+    if (n > 11) {
         numberbox.value = "";
         alert("Queen value is too large");
         return;
@@ -192,7 +192,7 @@ playButton.onclick = async function visualise() {
             let table = document.createElement('table');
             let header = document.createElement('h4');
             // div.setAttribute("id", `div-${100 + uuid[i]}`)
-            header.innerHTML = `Board ${i + 1} `
+            header.innerHTML = `${i + 1} `
             table.setAttribute("id", `table-${q.uuid[i]}`);
             header.setAttribute("id", `paragraph-${i}`);
             chessBoard.appendChild(div);
