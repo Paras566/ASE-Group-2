@@ -167,7 +167,7 @@ playButton.onclick = async function visualise() {
         return;
     } else if (n < 1) {
         numberbox.value = "";
-        alert("Queen value is too small");
+        alert("Queen value should be greater than 0");
         return;
     }
 
